@@ -108,5 +108,20 @@ router.post('/:id', (req, res, next) => {
 
 });
 
+//Get delete - should delete by id
+router.get('/delete/:id', (req,res,next)=>{
+  let id = req.params.id;
+
+  game.remove({_id: id},(err) =>{
+    if(err) {
+      console.log(err);
+      res.end(err);
+    }
+    else{
+      res.redirect('/games');
+    }
+  });
+});
+
 
 module.exports = router;
