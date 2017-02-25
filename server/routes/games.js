@@ -31,6 +31,30 @@ router.get('/', (req, res, next) => {
 
 });
 
+// Get
+router.get('/add', (req, res, next) =>{
+  res.render('games/details',{
+    title:'Add a new Game',
+    games: ''
+  });
+});
+
+//Post add page - save the Game to the db
+router.post('/add', (req, res, next) =>{
+  game.create({
+    "name": req.body.name,
+    "cost": req.body.rating,
+    "rating": req.body.rating
+  }, (err, game) => {
+    if(err){
+      console.log(err);
+      res.end(err);
+    }else{
+      res.redirect('/games');
+    }
+  });
+});
+
 /* GET edit - show current game to edit. */
 router.get('/:id', (req, res, next) => {
     // get a reference to the id of the game to edit
@@ -56,7 +80,7 @@ router.get('/:id', (req, res, next) => {
 
 });
 
-/* GET edit - process the game to edit */
+/* Post edit - process the game to edit */
 router.post('/:id', (req, res, next) => {
     // get a reference to the id of the game to edit
     let id = req.params.id;
