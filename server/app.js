@@ -11,7 +11,7 @@ let mongoose = require('mongoose');
 // import config module
 let config = require('./config/db')
 
-mongoose.connect(config.URI);
+mongoose.connect(process.env.URI || config.URI);
 
 let db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
